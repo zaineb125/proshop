@@ -1,0 +1,29 @@
+{
+  "name": "projet",
+  "version": "1.0.0",
+  "description": "Mern shopping cart map",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon back-end/server",
+    "server": "nodemon back-end/server",
+    "client": "npm start --prefix front-end",
+    "dev": "concurrently \"npm run server\" \"npm run client \"",
+    "data:import": "node back-end/seeder",
+    "data:destroy": "node back-end/seeder -d"
+  },
+  "author": "zaineb kefi",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-async-handler": "^1.2.0",
+    "mongoose": "^6.5.2"
+  },
+  "devDependencies": {
+    "concurrently": "^7.3.0",
+    "nodemon": "^2.0.19"
+  }
+}
