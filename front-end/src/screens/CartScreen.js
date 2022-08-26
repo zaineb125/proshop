@@ -29,19 +29,18 @@ const CartScreen = ({ match, location }) => {
   console.log("cartItems " + cartItems);
 
   useEffect(() => {
-    console.log("dispatch cartScreen");
-    console.log("productId " + id);
+
     if (id) {
       dispatch(addToCart(id, qty));
     }
-  }, [dispatch]);
+  }, [dispatch,id,qty]);
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id));
   };
 
   const checkoutHandler = () => {
-    navigate("/login?redirect=shipping");
+    navigate("/shipping");
   };
 
   return (
