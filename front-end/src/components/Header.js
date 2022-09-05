@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavDropdown } from "react-bootstrap";
-import SearchBox from './SearchBox'
+import SearchBox from "./SearchBox";
 import { logout } from "../actions/userActions";
 const Header = () => {
   const dispatch = useDispatch();
@@ -25,7 +25,8 @@ const Header = () => {
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav style={{ marginLeft: "80%" }}>
+            <SearchBox />
+            <Nav style={{ marginLeft: "70%" }}>
               <LinkContainer to="/cart/:id/:qty">
                 <Nav.Link>
                   <i className="fas fa-shopping-cart"></i> CART
