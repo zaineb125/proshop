@@ -4,23 +4,51 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import {
   productListReducer,
   productDetailsReducer,
+  productDeleteReducer,
+  productCreateReducer,
+  productUpdateReducer,
+  productReviewCreateReducer,
 } from "./reducers/productReducers.js";
 import {
   userLoginReducer,
   userRegisterReducer,
   userDetailsReducer,
   userUpdateProfileReducer,
+  userListReducer,
+  userDeleteReducer,
+  userUpdateReducer,
 } from "./reducers/UserReducers.js";
 import { cartReducer } from "./reducers/CartReducers.js";
+import {
+  orderCreateReducer,
+  orderDetailsReducer,
+  orderPayReducer,
+  orderListMyReducer,
+  orderListReducer,
+  orderDeliverReducer,
+} from "./reducers/orderReducers";
 
 const reducer = combineReducers({
   productList: productListReducer,
+  productUpdate: productUpdateReducer,
+  productReviewCreate: productReviewCreateReducer,
   productDetails: productDetailsReducer,
+  productDelete: productDeleteReducer,
+  productCreate: productCreateReducer,
   cart: cartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
+  userList: userListReducer,
+  userDelete: userDeleteReducer,
+  userUpdate: userUpdateReducer,
+  orderCreate: orderCreateReducer,
+  orderDetails: orderDetailsReducer,
+  orderPay: orderPayReducer,
+  orderListMy: orderListMyReducer,
+  orderList: orderListReducer,
+  orderDeliver: orderDeliverReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")
@@ -34,11 +62,17 @@ const userInfoFromStorage = localStorage.getItem("userInfo")
 const shippingAddressFromStorage = localStorage.getItem("shippingAddress")
   ? JSON.parse(localStorage.getItem("shippingAddress"))
   : {};
+const paymentMethodFromStorage = localStorage.getItem("paymentMethod")
+  ? JSON.parse(localStorage.getItem("paymentMethod"))
+  : {};
+
 console.log("userInfoFromStorage " + JSON.stringify(userInfoFromStorage));
 const initialState = {
   cart: {
+    user: userInfoFromStorage._id,
     cartItems: cartItemsFromStorage,
     shippingAddress: shippingAddressFromStorage,
+    paymentMethod: paymentMethodFromStorage,
   },
   userLogin: { userInfo: userInfoFromStorage },
 };

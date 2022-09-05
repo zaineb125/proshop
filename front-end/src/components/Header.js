@@ -5,7 +5,8 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavDropdown } from "react-bootstrap";
-import {logout} from '../actions/userActions'
+import SearchBox from './SearchBox'
+import { logout } from "../actions/userActions";
 const Header = () => {
   const dispatch = useDispatch();
   const userlogin = useSelector((state) => state.userLogin);
@@ -45,6 +46,19 @@ const Header = () => {
                     <i className="fas fa-user"></i> SIGN IN
                   </Nav.Link>
                 </LinkContainer>
+              )}
+              {userInfo && userInfo.isAdmin && (
+                <NavDropdown title="Admin" id="adminMenu">
+                  <LinkContainer to="/admin/userList">
+                    <NavDropdown.Item>Users</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/admin/productList">
+                    <NavDropdown.Item>Products</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/admin/orderList">
+                    <NavDropdown.Item>Orders</NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
               )}
             </Nav>
           </Navbar.Collapse>
