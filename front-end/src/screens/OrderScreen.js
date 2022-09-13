@@ -49,8 +49,8 @@ const OrderScreen = () => {
   }
 
   useEffect(() => {
-    if(!userInfo){
-      navigate('/login')
+    if (!userInfo) {
+      navigate("/login");
     }
     const addPayPalScript = async () => {
       const { data: clientId } = await axios.get("/api/config/paypal");
@@ -64,19 +64,18 @@ const OrderScreen = () => {
       document.body.appendChild(script);
     };
 
-    if (!order || successPay || successDeliver) {
+    dispatch(getOrderDetails(id));
+    /*if (!order || successPay || successDeliver || userInfo.isAdmin) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch({ type: ORDER_DELIVER_RESET });
-
-      dispatch(getOrderDetails(id));
-    } else if (!order.isPaid) {
+    } else*/ if (order && !order.isPaid) {
       if (!window.paypal) {
         addPayPalScript();
       } else {
         setSdkReady(true);
       }
     }
-  }, [dispatch, order, id, successPay, successDeliver]);
+  }, [dispatch, id, successPay, successDeliver]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(id, paymentResult));
@@ -108,12 +107,12 @@ const OrderScreen = () => {
               </p>
               <p>
                 <strong>Address:</strong>
-                {order.shippingAddress.address}, {order.shippingAddress.city}{" "}
+                {order.shippingAddress.address},{order.shippingAddress.city}{" "}
                 {order.shippingAddress.postalCode},{" "}
                 {order.shippingAddress.country}
               </p>
               {order.isDelivered ? (
-                <Message variant="success">Pais on {order.deliveredAt}</Message>
+                <Message variant="success">Paid on {order.deliveredAt}</Message>
               ) : (
                 <Message variant="danger">Not Delivered</Message>
               )}
@@ -125,8 +124,8 @@ const OrderScreen = () => {
                 <strong>Method: </strong>
                 {order.paymentMethod}
               </p>
-              {order.isPaid ? (
-                <Message variant="success">Pais on {order.paidAt}</Message>
+              {order?.isPaid ? (
+                <Message variant="success">Paid on {order.paidAt}</Message>
               ) : (
                 <Message variant="danger">Not Paid</Message>
               )}
@@ -195,17 +194,14 @@ const OrderScreen = () => {
                   <Col>${order.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
-              {!order.isPaid && (
+              {!order.isPaid && !userInfo.isAdmin && (
                 <ListGroup.Item>
                   {loadingPay && <Loader />}
-                  {!sdkReady ? (
-                    <Loader />
-                  ) : (
-                    <PayPalButton
-                      amount={order.totalPrice}
-                      onSuccess={successPaymentHandler}
-                    />
-                  )}
+
+                  <PayPalButton
+                    amount={order.totalPrice}
+                    onSuccess={successPaymentHandler}
+                  />
                 </ListGroup.Item>
               )}
               {loadingDeliver && <Loader />}

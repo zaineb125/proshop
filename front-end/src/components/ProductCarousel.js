@@ -1,39 +1,53 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Carousel, Image } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import Loader from "./Loader";
-import Message from "./Message";
-import { listTopProducts } from "../actions/productActions";
+import React from "react";
+import { Carousel } from "react-bootstrap";
 
 const ProductCarousel = () => {
-  const dispatch = useDispatch();
+  return (
+    <Carousel>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src="https://www.medradigital.com/wp-content/uploads/2017/07/E-commerce.jpg"
+          style={{ height: "90vh" }}
+          alt="First slide"
+        />
+        <Carousel.Caption>
+          <h3 style={{}}>Welcome to ProShop</h3>
+          <p style={{ fontWeight: "bold", color: "black" }}>
+            Here you can buy the newest products with the best prices .
+          </p>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src="https://www.amtsolutions.fr/wp-content/uploads/2018/05/photo-ecommerce.png"
+          alt="Second slide"
+          style={{ height: "90vh" }}
+        />
 
-  const productTopRated = useSelector((state) => state.productTopRated);
-  const { loading, error, products } = productTopRated;
+        <Carousel.Caption>
+          <h3 style={{ fontWeight: "bold" }}>Welcome to ProShop</h3>
+          <p style={{ fontWeight: "bold", color: "black" }}>
+            Here you can buy the newest products with the best prices .
+          </p>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src="https://i1.wp.com/digitiz.fr/wp-content/uploads/2020/09/Images-gratuites-ecommerce.jpg?fit=1100%2C550&ssl=1"
+          alt="Second slide"
+          style={{ height: "90vh" }}
+        />
 
-  useEffect(() => {
-    dispatch(listTopProducts());
-  }, [dispatch]);
-
-  return loading ? (
-    <Loader />
-  ) : error ? (
-    <Message variant="danger">{error}</Message>
-  ) : (
-    <Carousel pause="hover" className="bg-dark">
-      {products.map((product) => (
-        <Carousel.Item key={product._id}>
-          <Link to={`/product/${product._id}`}>
-            <Image src={product.image} alt={product.name} fluid />
-            <Carousel.Caption className="carousel-caption">
-              <h2>
-                {product.name} (${product.price})
-              </h2>
-            </Carousel.Caption>
-          </Link>
-        </Carousel.Item>
-      ))}
+        <Carousel.Caption>
+          <h3 style={{ fontWeight: "bold" }}>Welcome to ProShop</h3>
+          <p style={{ fontWeight: "bold", color: "black" }}>
+            Here you can buy the newest products with the best prices .
+          </p>
+        </Carousel.Caption>
+      </Carousel.Item>
     </Carousel>
   );
 };

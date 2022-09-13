@@ -36,6 +36,7 @@ const ProfileScreen = () => {
       navigate("/login");
     } else {
       if (!user || !user.name || success) {
+        
         dispatch(getUserDetails("profile"));
         dispatch(listMyOrders());
       } else {

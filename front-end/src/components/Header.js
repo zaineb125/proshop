@@ -7,27 +7,30 @@ import Navbar from "react-bootstrap/Navbar";
 import { NavDropdown } from "react-bootstrap";
 import SearchBox from "./SearchBox";
 import { logout } from "../actions/userActions";
+import { useNavigate } from "react-router-dom";
 const Header = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const userlogin = useSelector((state) => state.userLogin);
   const { userInfo } = userlogin;
 
   const logoutHandler = () => {
     dispatch(logout());
+    navigate("/");
   };
 
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
-        <Container>
+      <Navbar variant="dark" expand="lg" collapseOnSelect>
+        <Container className="nav-container">
           <LinkContainer to="/">
             <Navbar.Brand>ProShop</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
+          <Navbar.Collapse id="basic-navbar-nav" className="nav-collapse">
             <SearchBox />
-            <Nav style={{ marginLeft: "70%" }}>
-              <LinkContainer to="/cart/:id/:qty">
+            <Nav>
+              <LinkContainer to="/cart">
                 <Nav.Link>
                   <i className="fas fa-shopping-cart"></i> CART
                 </Nav.Link>

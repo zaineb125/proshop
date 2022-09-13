@@ -6,6 +6,9 @@ import store from "./store";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./bootstrap.min.css";
+import * as mdb from 'mdb-ui-kit'; 
+import { Input } from 'mdb-ui-kit'; 
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

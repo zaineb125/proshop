@@ -29,11 +29,10 @@ const CartScreen = ({ match, location }) => {
   console.log("cartItems " + cartItems);
 
   useEffect(() => {
-
     if (id) {
       dispatch(addToCart(id, qty));
     }
-  }, [dispatch,id,qty]);
+  }, [dispatch, id, qty]);
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id));
@@ -46,6 +45,12 @@ const CartScreen = ({ match, location }) => {
   return (
     <Row>
       <Col md={8}>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
         <h1>Shopping Cart</h1>
         {cartItems.length === 0 ? (
           <Message>
@@ -60,7 +65,12 @@ const CartScreen = ({ match, location }) => {
                     <Image src={item.image} alt={item.name} fluid rounded />
                   </Col>
                   <Col md={3}>
-                    <Link to={`/product/${item.product}`}>{item.name}</Link>
+                    <Link
+                      to={`/product/${item.product}`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      {item.name}
+                    </Link>
                   </Col>
                   <Col md={2}>${item.price}</Col>
                   <Col md={2}>
@@ -95,7 +105,12 @@ const CartScreen = ({ match, location }) => {
           </ListGroup>
         )}
       </Col>
+
       <Col md={4}>
+        <br />
+        <br />
+        <br />
+        <br />
         <Card>
           <ListGroup variant="flush">
             <ListGroup.Item>
